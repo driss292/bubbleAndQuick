@@ -34,10 +34,18 @@ public class App {
         System.out.println("Le tableau initial");
         // bubbleSort1.afficherTableau();
         quickSort.afficherTableau();
-
+        long startTime = System.nanoTime();
         // Trier le tableau
         // bubbleSort1.sort();
         quickSort.sort();
+        long endTime = System.nanoTime();
+
+        long duration = endTime - startTime;
+
+        // Afficher le temps écoulé en millisecondes (nanoTime() retourne une valeur en
+        // nanosecondes)
+        // Pas très probant ce calcul...
+        System.out.println("Temps écoulé :" + (duration / 1_000_000) + "millisecondes");
 
         System.out.println("Le tableau trié");
         // bubbleSort1.afficherTableau();
