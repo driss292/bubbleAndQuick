@@ -1,54 +1,51 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class QuickSort {
-    // int[] tableau;
 
-    // // Constructeur pour initialiser le tableau
-    // public QuickSort(int[] tableau) {
-    // this.tableau = tableau;
-    // }
+    private int[] tableau;
+    private int lowIndex;
+    private int highIndex;
 
-    // // Méthode pour effectuer le quick sort
-    // public void sort() {
-    // int length = tableau.length;
-    // int pivot = tableau.length - 1;
-    // ArrayList<Integer> arrayLeft = new ArrayList<>();
-    // ArrayList<Integer> arrayRight = new ArrayList<>();
+    public QuickSort(int[] tableau, int lowIndex, int highIndex) {
+        this.tableau = tableau;
+        this.lowIndex = lowIndex;
+        this.highIndex = highIndex;
+    }
 
-    // if (length == 1) {
-    // return;
-    // }
-    // for (int i = 0; i < length; i++) {
-    // if (tableau[i] < pivot) {
-    // arrayLeft.add(tableau[i]);
-    // } else {
-    // arrayRight.add(tableau[i]);
-    // }
-    // }
-    // }
+    public int[] sort() {
+        return quickSort(tableau, lowIndex, highIndex);
+    }
 
-    // // Méthode pour afficher le tableau
-    // public void afficherTableau() {
-    // for (int element : tableau) {
-    // System.out.println(element + " ");
-    // }
-    // System.out.println();
-    // }
-
-    public static List<Integer> quickSort(List<Integer> tableau) {
-        if (tableau.size() == 1) {
-            return tableau;
+    public static int[] quickSort(int[] array, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(array, low, high);
+            quickSort(array, low, pivotIndex - 1);
+            quickSort(array, pivotIndex + 1, high);
         }
+        return array;
+    }
 
-        // Choix du pivot
-        int pivot = tableau.get(tableau.size() - 1);
+    public static int partition(int[] array, int low, int high) {
+        int pivot = array[high];
+        int lowerNumberIndex = (low - 1);
+        for (int i = low; i < high; i++) {
+            if (array[i] < pivot) {
+                lowerNumberIndex++;
+                int temp = array[lowerNumberIndex];
+                array[lowerNumberIndex] = array[i];
+                array[i] = temp;
+            }
+        }
+        int temp = array[lowerNumberIndex + 1];
+        array[lowerNumberIndex + 1] = array[high];
+        array[high] = temp;
+        return lowerNumberIndex + 1;
+    }
 
-        // Création des deux partitions
-        List<Integer> arrayLeft = new ArrayList<>();
-        List<Integer> arrayRight = new ArrayList<>();
-
-        return tableau;
+    // Méthode pour afficher le tableau trié
+    public void afficherTableau() {
+        for (int element : tableau) {
+            System.out.print(element + " ");
+        }
+        System.out.println();
     }
 
 }
